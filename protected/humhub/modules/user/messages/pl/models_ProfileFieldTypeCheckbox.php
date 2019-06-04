@@ -1,5 +1,5 @@
 <?php
 return array (
-  'Checkbox field options' => 'Opcje pól wyboru',
+  'Checkbox field options' => '',
   'Default value' => 'Domyślna wartość',
 );

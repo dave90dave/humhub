@@ -2,14 +2,6 @@ HumHub Change Log
 =================
 
 
-1.3.14  (Unreleased)
----------------------------
-- Fix: LinkedIn API call to v1 deprecated use v2 (@Felli)
-- Fix #3531: File module Fil: isAssignedTo method broken
-- Fix: Added missing admin group title encodings
-- Enh: Added featured module flag to marketplace view
-
-
 1.3.13  (May 3, 2019)
 ----------------------
 - Enh: Added HomeUrl support to ConsoleApplication
@@ -43,6 +35,7 @@ HumHub Change Log
 - Fix: Notification count update does not respect notification group
 - Fix: Change email form is restricted to max 45 characters. Changed to 150 (current DB restriction)
 - Fix: Footer menu renders redundant `<li>` end tag.
+
 
 1.3.11  (March 06, 2019)
 ---------------------------

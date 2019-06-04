@@ -2,7 +2,6 @@
 
 namespace humhub\modules\admin\models\forms;
 
-use humhub\libs\Html;
 use humhub\modules\user\models\GroupUser;
 use Yii;
 use humhub\modules\user\models\User;
@@ -148,7 +147,7 @@ class UserEditForm extends User
 
         $result = [];
         foreach ($groups as $group) {
-            $result[$group->id] = Html::encode($group->name);
+            $result[$group->id] = $group->name;
         }
 
         return $result;

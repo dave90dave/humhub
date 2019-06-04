@@ -29,76 +29,67 @@ class LinkedIn extends \yii\authclient\clients\LinkedIn
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public $authUrl = 'https://www.linkedin.com/oauth/v2/authorization';
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public $tokenUrl = 'https://www.linkedin.com/oauth/v2/accessToken';
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
-    public $apiBaseUrl = 'https://api.linkedin.com/v2';
+    public $apiBaseUrl = 'https://api.linkedin.com/v1';
 
     /**
-     * @var array list of attribute names, which should be requested from API to initialize user attributes.
+     * {@inheritdoc}
      */
     public $attributeNames = [
         'id',
-        'firstName',
-        'lastName',
+        'email-address',
+        'first-name',
+        'last-name',
+        'public-profile-url',
     ];
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function init()
     {
         parent::init();
         if ($this->scope === null) {
             $this->scope = implode(' ', [
-                'r_liteprofile',
+                'r_basicprofile',
                 'r_emailaddress',
             ]);
         }
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function defaultNormalizeUserAttributeMap()
     {
         return [
-            'first_name' => function ($attributes) {
-                return array_values($attributes['firstName']['localized'])[0];
-            },
-            'last_name' => function ($attributes) {
-                return array_values($attributes['lastName']['localized'])[0];
-            },
+            'email' => 'email-address',
+            'first_name' => 'first-name',
+            'last_name' => 'last-name',
         ];
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function initUserAttributes()
     {
-        $attributes = $this->api('me?projection=(' . implode(',', $this->attributeNames) . ')', 'GET');
-        $scopes = explode(' ', $this->scope);
-        if (in_array('r_emailaddress', $scopes, true)) {
-            $emails = $this->api('emailAddress?q=members&projection=(elements*(handle~))', 'GET');
-            if (isset($emails['elements'][0]['handle~']['emailAddress'])) {
-                $attributes['email'] = $emails['elements'][0]['handle~']['emailAddress'];
-            }
-        }
-        return $attributes;
+        return $this->api('people/~:(' . implode(',', $this->attributeNames) . ')', 'GET');
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function applyAccessTokenToRequest($request, $accessToken)
     {
@@ -108,7 +99,7 @@ class LinkedIn extends \yii\authclient\clients\LinkedIn
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function defaultName()
     {
@@ -116,7 +107,7 @@ class LinkedIn extends \yii\authclient\clients\LinkedIn
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function defaultTitle()
     {

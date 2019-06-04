@@ -1,7 +1,7 @@
 <?php
 return array (
-  'Add new members...' => 'Dodaj nowych członków...',
+  'Add new members...' => '',
   'No' => 'Nie',
-  'Remove from group' => 'Usuń z grupy',
+  'Remove from group' => '',
   'Yes' => 'Tak',
 );

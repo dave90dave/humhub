@@ -8,7 +8,6 @@
 
 namespace humhub\modules\admin\models\forms;
 
-use humhub\libs\Html;
 use yii\base\Model;
 use humhub\modules\user\models\Group;
 
@@ -138,7 +137,7 @@ class UserGroupForm extends Model
     {
         $result = [];
         foreach ($groups as $group) {
-            $result[$group->id] = Html::encode($group->name);
+            $result[$group->id] = $group->name;
         }
 
         return $result;
